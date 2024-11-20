@@ -56,7 +56,7 @@ optimizer = torch.optim.Adam(model.parameters(), lr=5e-5)
 
 # Training Loop
 model.train()
-for epoch in range(3):
+for epoch in range(1):
     start_time = time.time()   # track start time
     for batch in train_dataloader:
         inputs, masks, labels = batch
@@ -101,7 +101,7 @@ print("Test F1-score:", f1)
 print("Test ROC-AUC:", roc_auc)
 
 # Training Loop with attention masks
-num_epochs = 4
+num_epochs = 1
 for epoch in range(num_epochs):
     model.train()
     train_loss = 0
@@ -156,6 +156,8 @@ for epoch in range(num_epochs):
     print(f"Validation Precision: {val_precision}")
     print(f"Validation Recall: {val_recall}")
     print(f"Validation F1-score: {val_f1}\n")
+
+model.save_pretrained('/model')
 
 #1. Plot the Confusion Matrix
 cm = confusion_matrix(test_true_labels, test_predictions)
